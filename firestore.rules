@@ -3,7 +3,7 @@ service cloud.firestore {
 		match /profiles {
       match /{uid} {
       	allow read;
-        allow create, update: if uid == auth.uid;
+        allow write;
       }
     }
   }

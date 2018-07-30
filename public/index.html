@@ -15,58 +15,95 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Friendly microblog</title>
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-    <script type="text/javascript">
-      var config = {
-        apiKey: "AIzaSyCtSsCK7qQ5U9G4R88NXvihDP-xBXCJyTU",
-        authDomain: "wipeout-takeout.firebaseapp.com",
-        databaseURL: "https://wipeout-takeout.firebaseio.com",
-        storageBucket: "wipeout-takeout.appspot.com",
-        projectId: "wipeout-takeout"
-      };
-      firebase.initializeApp(config);
-      var CLIENT_ID = "AIzaSyD_CRDo0EBwiCOmqW9DQgkBHfUZ_Gf6TOI";
-    </script>
-  </head>
-  <body>
-    <div id="container">
-      <h3>Friendly Microblog</h3>
-      <div id="loading">Loading...</div>
-      <div id="loaded" class="hidden">
-        <div id="main">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Friendly microblog</title>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+  <link rel="stylesheet" href="/main.css">
+
+  <script type="text/javascript">
+    var config = {
+      apiKey: "AIzaSyD_CRDo0EBwiCOmqW9DQgkBHfUZ_Gf6TOI",
+      authDomain: "rachels-microblog.firebaseapp.com",
+      storageBucket: "rachels-microblog.appspot.com",
+      projectId: "rachels-microblog"
+    };
+    firebase.initializeApp(config);
+    var CLIENT_ID = "138956529376-j9q8agbni4isdqq7cn7oos8llj378nlq";
+  </script>
+</head>
+
+<body>
+  <!-- Header section -->
+  <header class=" header fp-header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+    <div class="mdl-layout__header-row fp-titlebar">
+      <h3>Friendly Microblog</a></h3>
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </header>
+
+  <div id="container">
+    <div id="loading">Loading...</div>
+    <div id="loaded" class="hidden">
+      <div id="main">
+        <nav class="mdl-navigation">
+
+          <!-- Signed-in right nav bar -->
           <div id="user-signed-in" class="hidden">
             <div id="user-info">
-              <div id="photo-container">
-                <img id="photo">
-              </div>
+              <div id="user-photo" class="fp-avatar"></div>
               <div id="name"></div>
               <div id="email"></div>
               <div id="uid"></div>
               <div class="clearfix"></div>
             </div>
             <p>
-              <button id="sign-out">Sign Out</button>
-              <button id="delete-account">Delete account</button>
+              <button class="fp-sign-out mdl-button fp-signed-in-only" id="sign-out">Sign out</button>
+              <button class="fp-delete-account mdl-button fp-signed-in-only" id="delete-account">Delete account</button>
             </p>
           </div>
+
+          <!-- Signed-out right nav bar -->
           <div id="user-signed-out" class="hidden">
             <h4>You are signed out.</h4>
-            <p>
-              <button id="sign-in">Sign In</button>
-            </p>
-            <div id="firebaseui-spa">
-             <div id="firebaseui-container"></div>
-           </div>
           </div>
+        </nav>
+
+        <div id="firebaseui-spa">
+          <div id="firebaseui-container"></div>
         </div>
       </div>
+
+      <!-- New post page -->
+      <section id="page-add" class="mdl-grid fp-content">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
+          <div class="fp-addcontainer mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <form id="microblogForm" action="#">
+                <p>
+                  What's on your mind?
+                </p>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="post-content">
+                  <label class="mdl-textfield__label" for="imageCaptionInput">in 140 characters or less</label>
+                </div>
+                <br />
+                <button type="submit" id="save-post" class="fp-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400">
+                  Save this for posterity
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
-    <script src="main.js"></script>
-  </body>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

@@ -72,15 +72,6 @@ function getRecaptchaMode() {
       'invisible' : 'normal';
 };
 
-
-/**
- * Open a popup with the FirebaseUI widget.
- */
-var signIn = function() {
-  window.open(getWidgetUrl(), 'Sign In', 'width=985,height=735');
-};
-
-
 /**
  * Displays the UI for a signed in user.
  * @param {!firebase.User} user
@@ -89,17 +80,11 @@ var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
   document.getElementById('name').textContent = user.displayName;
-  document.getElementById('email').textContent = user.email;
-  document.getElementById('uid').textContent = user.uid;
   if (user.photoURL){
-    document.getElementById('photo').src = user.photoURL;
-    document.getElementById('photo').style.display = 'block';
-  } else {
-    document.getElementById('photo').style.display = 'none';
+    document.getElementById('user-photo').src = user.photoURL;
   }
 
-  // When a user signs in, save their user info to RTDB and Firestore,
-  // to demo wipeout and takeout functionality.
+  // When a user signs in, save basic user info to Firestore,
   var data = {
     name: user.displayName,
     email: user.email,
@@ -107,22 +92,11 @@ var handleSignedInUser = function(user) {
     color: "blue"
   };
 
-  firebase.storage().ref()
-      .child(`${user.uid}/sample_data.json`)
-      .putString(`{photo: ${user.photoURL}}`);
-  firebase.database().ref('users/' + user.uid).set(data);
+  // firebase.storage().ref()
+  //     .child(`${user.uid}/sample_data.json`)
+  //     .putString(`{photo: ${user.photoURL}}`);
   firebase.firestore().collection('users').doc(user.uid).set(data);
-  firebase.firestore().collection('admins').doc(user.uid).set(data);
 };
-
-var uploadToStorage = function(uid, takeout) {
-  var json = JSON.stringify(takeout);
-  var bucket = storage.bucket(bucketName);
-  var file = bucket.file(`${uid}.json`);
-
-  return file.save(json);
-};
-
 
 /**
  * Displays the UI for a signed out user.
@@ -153,12 +127,14 @@ var deleteAccount = function(firebaseStorage) {
   });
 };
 
+var savePost = function(data) {
+  const newPostKey = firebase.firestore().collection('/posts').set(data);
+}
+
 /**
  * Initializes the app.
  */
 var initApp = function() {
-  document.getElementById('sign-in').addEventListener(
-      'click', signIn);
   document.getElementById('sign-out').addEventListener(
       'click', function() {
         firebase.auth().signOut();
@@ -169,9 +145,9 @@ var initApp = function() {
         deleteAccount();
       }
   );
-  document.getElementById('takeout').addEventListener(
+  document.getElementById('save-post').addEventListener(
       'click', function() {
-        takeout();
+        savePost();
       }
   );
 };
