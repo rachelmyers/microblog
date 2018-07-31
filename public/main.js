@@ -81,7 +81,6 @@ var handleSignedInUser = function(user) {
   document.getElementById('user-signed-out').style.display = 'none';
   document.getElementById('name').textContent = user.displayName;
   document.getElementById('uid').textContent = user.uid;
-
   if (user.photoURL){
     document.getElementById('user-photo').src = user.photoURL;
   }
@@ -91,8 +90,6 @@ var handleSignedInUser = function(user) {
     name: user.displayName,
     email: user.email,
     photo: user.photoURL,
-
-    color: "blue"
   };
 
   firebase.firestore().collection('users').doc(user.uid).set(data);
@@ -130,12 +127,15 @@ var deleteAccount = function(firebaseStorage) {
 var savePost = function() {
   var content = document.getElementById('content').value;
   var uid = document.getElementById('uid').textContent;
-  var time = new Date().getTime()
+  var time = new Date().getTime().toString()
   var data = {
     author_uid: uid,
-    content: content
+    content: content,
+    posted_at: time
   }
-  firebase.firestore().collection('/posts').doc(time.toString()).set(data);
+  firebase.firestore().collection('/posts').doc(`${uid}+${time}`).set(data).then(function(){
+    console.log("saved post!");
+  })
 };
 
 /**

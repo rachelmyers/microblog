@@ -56,15 +56,15 @@ limitations under the License.
           <!-- Signed-in right nav bar -->
           <div id="user-signed-in" class="hidden">
             <div id="user-info">
-              <div id="user-photo" class="fp-avatar"></div>
+              <img id="user-photo" class="fp-avatar"></img>
               <div id="name"></div>
               <div id="email"></div>
               <div id="uid" style="display: none;"></div>
               <div class="clearfix"></div>
             </div>
             <p>
-              <button class="fp-sign-out mdl-button fp-signed-in-only" id="sign-out">Sign out</button>
-              <button class="fp-delete-account mdl-button fp-signed-in-only" id="delete-account">Delete account</button>
+              <div><button class="fp-sign-out mdl-button fp-signed-in-only" id="sign-out">Sign out</button></div>
+              <div><button class="fp-delete-account mdl-button fp-signed-in-only" id="delete-account">Delete account</button></div>
             </p>
           </div>
 
@@ -81,26 +81,33 @@ limitations under the License.
 
       <!-- New post page -->
       <section id="page-add" class="mdl-grid fp-content">
-        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
-          <div class="fp-addcontainer mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-              <form id="new-post" action="#">
-                <p>
-                  What's on your mind?
-                </p>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="content">
-                  <label class="mdl-textfield__label" for="imageCaptionInput">in 140 characters or less</label>
-                </div>
-                <br />
-                <button type="submit" id="save-post" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                  Save this for posterity
-                </button>
-              </form>
-            </div>
+        <form id="new-post" action="#">
+          <p>
+            What's on your mind?
+          </p>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="content">
+            <label class="mdl-textfield__label" for="imageCaptionInput">in 140 characters or less</label>
+          </div>
+          <br />
+          <button type="submit" id="save-post" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Save this for posterity
+          </button>
+        </form>
+      </section>
+
+      <!-- New post page -->
+      <section id="firehose" class="mdl-grid fp-content">
+        <div class="image-container mdl-cell mdl-cell--12-col mdl-grid">
+          <div class="fp-no-posts fp-help mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet
+                      mdl-cell--8-col-desktop mdl-grid mdl-grid--no-spacing">
+             <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+               <i class="fp-info material-icons">help</i>
+             </div>
           </div>
         </div>
       </section>
+
 
     </div>
   </div>
