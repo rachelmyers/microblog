@@ -80,6 +80,8 @@ var handleSignedInUser = function(user) {
   document.getElementById('user-signed-in').style.display = 'block';
   document.getElementById('user-signed-out').style.display = 'none';
   document.getElementById('name').textContent = user.displayName;
+  document.getElementById('uid').textContent = user.uid;
+
   if (user.photoURL){
     document.getElementById('user-photo').src = user.photoURL;
   }
@@ -89,12 +91,10 @@ var handleSignedInUser = function(user) {
     name: user.displayName,
     email: user.email,
     photo: user.photoURL,
+
     color: "blue"
   };
 
-  // firebase.storage().ref()
-  //     .child(`${user.uid}/sample_data.json`)
-  //     .putString(`{photo: ${user.photoURL}}`);
   firebase.firestore().collection('users').doc(user.uid).set(data);
 };
 
@@ -127,9 +127,16 @@ var deleteAccount = function(firebaseStorage) {
   });
 };
 
-var savePost = function(data) {
-  const newPostKey = firebase.firestore().collection('/posts').set(data);
-}
+var savePost = function() {
+  var content = document.getElementById('content').value;
+  var uid = document.getElementById('uid').textContent;
+  var time = new Date().getTime()
+  var data = {
+    author_uid: uid,
+    content: content
+  }
+  firebase.firestore().collection('/posts').doc(time.toString()).set(data);
+};
 
 /**
  * Initializes the app.
@@ -145,11 +152,9 @@ var initApp = function() {
         deleteAccount();
       }
   );
-  document.getElementById('save-post').addEventListener(
-      'click', function() {
-        savePost();
-      }
-  );
+  document.getElementById('new-post').onsubmit = function(form) {
+    savePost();
+  };
 };
 
 window.addEventListener('load', initApp);

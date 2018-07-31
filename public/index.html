@@ -41,7 +41,8 @@ limitations under the License.
   <!-- Header section -->
   <header class=" header fp-header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
     <div class="mdl-layout__header-row fp-titlebar">
-      <h3>Friendly Microblog</a></h3>
+      <h2>Friendly Microblog</h2>
+      <h3>Powered by Firebase</h3>
       <div class="mdl-layout-spacer"></div>
     </div>
   </header>
@@ -58,7 +59,7 @@ limitations under the License.
               <div id="user-photo" class="fp-avatar"></div>
               <div id="name"></div>
               <div id="email"></div>
-              <div id="uid"></div>
+              <div id="uid" style="display: none;"></div>
               <div class="clearfix"></div>
             </div>
             <p>
@@ -69,7 +70,7 @@ limitations under the License.
 
           <!-- Signed-out right nav bar -->
           <div id="user-signed-out" class="hidden">
-            <h4>You are signed out.</h4>
+            <h4>Sign in to post.</h4>
           </div>
         </nav>
 
@@ -81,18 +82,18 @@ limitations under the License.
       <!-- New post page -->
       <section id="page-add" class="mdl-grid fp-content">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
-          <div class="fp-addcontainer mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+          <div class="fp-addcontainer mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
             <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-              <form id="microblogForm" action="#">
+              <form id="new-post" action="#">
                 <p>
                   What's on your mind?
                 </p>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="post-content">
+                  <input class="mdl-textfield__input" type="text" id="content">
                   <label class="mdl-textfield__label" for="imageCaptionInput">in 140 characters or less</label>
                 </div>
                 <br />
-                <button type="submit" id="save-post" class="fp-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400">
+                <button type="submit" id="save-post" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                   Save this for posterity
                 </button>
               </form>
