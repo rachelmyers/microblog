@@ -92,7 +92,9 @@ var handleSignedInUser = function(user) {
     photo: user.photoURL,
   };
 
-  firebase.firestore().collection('users').doc(user.uid).set(data);
+  firebase.firestore().collection('users').doc(user.uid).set(data).then(function(transaction) {
+    fetchPosts();
+  });
 };
 
 /**
@@ -127,16 +129,44 @@ var deleteAccount = function(firebaseStorage) {
 var savePost = function() {
   var content = document.getElementById('content').value;
   var uid = document.getElementById('uid').textContent;
+  var authorName = document.getElementById('name').textContent;
+  var photoURL = document.getElementById('user-photo').src;
   var time = new Date().getTime().toString()
   var data = {
     author_uid: uid,
+    author_name: authorName,
+    photo_url: photoURL,
     content: content,
-    posted_at: time
+    posted_at: time,
   }
   firebase.firestore().collection('/posts').doc(`${uid}+${time}`).set(data).then(function(){
-    console.log("saved post!");
   })
 };
+
+var fetchPosts = function() {
+  var query = firebase.firestore()
+    .collection('posts')
+    .orderBy('posted_at', 'desc')
+    .limit(50);
+  var posts = [];
+  query.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(documentSnapshot) {
+      var data = documentSnapshot.data();
+      renderPost(data);
+    });
+  })
+};
+
+var renderPost = function(data) {
+  var firehose = document.getElementById('firehose');
+  var post = document.createElement("div");
+  post.className = "fp-post";
+  var ptag = document.createElement("p");
+  var content = document.createTextNode(JSON.stringify(data.content));
+  ptag.appendChild(content)
+  post.appendChild(ptag);
+  firehose.appendChild(post);
+}
 
 /**
  * Initializes the app.

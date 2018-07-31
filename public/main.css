@@ -103,11 +103,10 @@ a {
 #page-add {
   display: block;
   text-align: center;
-  width: 75%
+  width: 100%
 }
 .fp-content .mdl-cell .fp-addcontainer {
   margin: auto;
-  max-width: 800px;
   display: block;
   text-align: left;
 }
@@ -124,9 +123,17 @@ a {
 }
 
 /* Post */
+#firehose {
+  border-top: solid;
+  max-width: 90%;
+  margin: 25px;
+}
+
 .fp-post {
-  margin-left: auto;
-  margin-right: auto;
+  border-bottom: solid;
+  width: 100%;
+  margin: 30px;
+  line-height: 150%;
 }
 .fp-post .mdl-card {
   height: 100%;
@@ -134,21 +141,8 @@ a {
   left: 0;
   padding-bottom: 10px;
 }
-.fp-post .fp-image {
-  flex: 1;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: black;
-  background-position: 50% 50%;
-  box-sizing: border-box;
-  padding-top: 25%;
-  position: relative;
-  padding-bottom: 25%;
-  min-height: 250px;
-  cursor: pointer;
-}
-.fp-post .fp-time:HOVER {
-  color: black;
+.fp-post p {
+  text-align: center;
 }
 .fp-post .fp-likes {
   color: #444;

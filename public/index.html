@@ -39,7 +39,28 @@ limitations under the License.
 
 <body>
   <!-- Header section -->
-  <header class=" header fp-header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+  <header class=" header fp-header mdl-layout__header mdl-color-text--white">
+
+    <nav class="mdl-navigation">
+
+      <!-- Signed-in right nav bar -->
+      <div id="user-signed-in" class="hidden">
+        <div id="user-info">
+          <img id="user-photo" class="fp-avatar" style="margin: 20px 10px 0 10px; display:inline-block;"></img>
+          <div id="name" style="top: 0px; display:inline-block;"></div>
+          <div id="email"></div>
+          <div id="uid" style="display: none;"></div>
+        </div>
+        <div><button class="fp-sign-out mdl-button fp-signed-in-only" id="sign-out">Sign out</button></div>
+        <div><button class="fp-delete-account mdl-button fp-signed-in-only" id="delete-account">Delete account</button></div>
+      </div>
+
+      <!-- Signed-out right nav bar -->
+      <div id="user-signed-out" class="hidden">
+        <h4>Sign in to post.</h4>
+      </div>
+    </nav>
+
     <div class="mdl-layout__header-row fp-titlebar">
       <h2>Friendly Microblog</h2>
       <h3>Powered by Firebase</h3>
@@ -51,28 +72,6 @@ limitations under the License.
     <div id="loading">Loading...</div>
     <div id="loaded" class="hidden">
       <div id="main">
-        <nav class="mdl-navigation">
-
-          <!-- Signed-in right nav bar -->
-          <div id="user-signed-in" class="hidden">
-            <div id="user-info">
-              <img id="user-photo" class="fp-avatar"></img>
-              <div id="name"></div>
-              <div id="email"></div>
-              <div id="uid" style="display: none;"></div>
-              <div class="clearfix"></div>
-            </div>
-            <p>
-              <div><button class="fp-sign-out mdl-button fp-signed-in-only" id="sign-out">Sign out</button></div>
-              <div><button class="fp-delete-account mdl-button fp-signed-in-only" id="delete-account">Delete account</button></div>
-            </p>
-          </div>
-
-          <!-- Signed-out right nav bar -->
-          <div id="user-signed-out" class="hidden">
-            <h4>Sign in to post.</h4>
-          </div>
-        </nav>
 
         <div id="firebaseui-spa">
           <div id="firebaseui-container"></div>
@@ -96,16 +95,10 @@ limitations under the License.
         </form>
       </section>
 
-      <!-- New post page -->
+      <!-- Firehose -->
       <section id="firehose" class="mdl-grid fp-content">
-        <div class="image-container mdl-cell mdl-cell--12-col mdl-grid">
-          <div class="fp-no-posts fp-help mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet
-                      mdl-cell--8-col-desktop mdl-grid mdl-grid--no-spacing">
-             <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-               <i class="fp-info material-icons">help</i>
-             </div>
-          </div>
-        </div>
+        <h2>Firehose of recent posts</h2>
+      <!-- Posts added here -->
       </section>
 
 
